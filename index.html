@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Signal Processing Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">اختبارات معالجة الإشارات الرقمية</h1>
+        <form id="quiz-selection" class="d-flex justify-content-center align-items-center flex-wrap gap-3" style="direction: rtl;">
+            <div class="form-check mx-3 main_q">
+                <input class="form-check-input" type="radio" id="quiz3" name="quiz" value="ch_3.json" checked>
+                <label class="form-check-label" for="quiz3"> Z-Transform اختبار</label>
+            </div>
+            <div class="form-check mx-3 main_q">
+                <input class="form-check-input" type="radio" id="quiz4" name="quiz" value="ch_4.json">
+                <label class="form-check-label" for="quiz4">Fourier analysis اختبار</label>
+            </div>
+            <div class="form-check mx-3 main_q">
+                <input class="form-check-input" type="radio" id="quiz43" name="quiz" value="ch_4_3.json">
+                <label class="form-check-label" for="quiz43">اختبار الدرس الرابع و الثالث</label>
+            </div>
+            <div class="form-check mx-3 main_q">
+                <input class="form-check-input" type="radio" id="quiz543" name="quiz" value="ch_5_4_3.json">
+                <label class="form-check-label" for="quiz543">الاختبار الشامل</label>
+            </div>
+            <button type="submit" class="btn btn-primary start_q">بداية الاختبار</button>
+        </form>
+
+        <form id="quizForm">
+            <div id="quizContainer"></div>
+            <button type="submit" class="btn btn-primary mt-3">تقديم الإجابات</button>
+            <button type="button" id="retryButton" class="btn btn-secondary mt-3 d-none" onclick="location.reload()">إعادة المحاولة</button>
+        </form>
+    </div>
+
+    <!-- Score Modal with Progress Circle -->
+    <div class="modal fade" id="scoreProgressModal" tabindex="-1" aria-labelledby="scoreProgressModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scoreProgressModalLabel">نتيجة الاختبار</h5>
+                    <!-- No close button in header, force user to click footer button -->
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center flex-column">
+                    <div id="progressCircle" class="progress-circle mb-3">
+                        <div id="scoreTextCircle" class="score-text-circle">
+                            <!-- Score text will be inserted here by JS -->
+                        </div>
+                    </div>
+                    <p>سيتم عرض تفاصيل الإجابات بعد إغلاق هذه النافذة.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">عرض التفاصيل</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>
