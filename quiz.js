@@ -137,7 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
     quizSelectionForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const selectedQuiz = document.querySelector('input[name="quiz"]:checked').value;
+        // إعادة تهيئة واجهة المستخدم وحالة الأزرار
+        retryButton.classList.add('d-none');
+        submitButton.classList.remove('d-none');
+        // إزالة أي نتائج أو ألوان سابقة من الأسئلة
         quizContainer.innerHTML = '';
+        // تحميل الأسئلة الجديدة
         loadQuestions(selectedQuiz);
     });
 
