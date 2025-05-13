@@ -149,36 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ❌ لا نحمل أي اختبار افتراضياً
 });
 
-// زر تبديل الوضع الداكن/الفاتح
-window.addEventListener('DOMContentLoaded', function() {
-    const body = document.body;
-    const toggleModeBtn = document.getElementById('toggleModeBtn');
-    const toggleModeIcon = document.getElementById('toggleModeIcon');
-
-    // استرجاع الوضع المحفوظ
-    const savedMode = localStorage.getItem('colorMode');
-    if (savedMode === 'dark') {
-        body.classList.add('dark-mode');
-        toggleModeIcon.innerHTML = '&#9789;'; // قمر
-    } else if (savedMode === 'light') {
-        body.classList.remove('dark-mode');
-        toggleModeIcon.innerHTML = '&#9788;'; // شمس
-    }
-
-    toggleModeBtn.addEventListener('click', function() {
-        if (body.classList.contains('dark-mode')) {
-            body.classList.remove('dark-mode');
-            localStorage.setItem('colorMode', 'light');
-            toggleModeIcon.innerHTML = '&#9788;'; // شمس
-        } else {
-            body.classList.add('dark-mode');
-            localStorage.setItem('colorMode', 'dark');
-            toggleModeIcon.innerHTML = '&#9789;'; // قمر
-        }
-    });
-
 // أزرار الانتقال للأعلى والأسفل
-
+window.addEventListener('DOMContentLoaded', function() {
     const scrollUpBtn = document.getElementById('scrollUpBtn');
     const scrollDownBtn = document.getElementById('scrollDownBtn');
 

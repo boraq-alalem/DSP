@@ -1,29 +1,9 @@
 body {
     font-family: 'Cairo', sans-serif;
-    /* خلفية تدرج هافت افتراضي (أزرق هادئ) */
     /* background: linear-gradient(135deg, #d0e9ff 0%, #eaf4ff 60%, #fafdff 100%); */
     min-height: 100vh;
     direction: ltr;
     transition: background 0.5s;
-}
-
-/* الوضع الداكن */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(135deg, #232526 0%, #414345 100%);
-    color: #f8f8f8;
-  }
-}
-
-/* الوضع الهافت (soft mode) - يدوي أو عبر كلاس */
-body.soft-mode {
-    background: linear-gradient(135deg, #fafdff 0%, #eaf4ff 60%, #d0e9ff 100%);
-    color: #1a237e;
-}
-
-body.dark-mode {
-    background: linear-gradient(135deg, #232526 0%, #414345 100%);
-    color: #f8f8f8;
 }
 
 
@@ -116,6 +96,17 @@ body.dark-mode .question-card {
     margin-right: 10px; /* Space between radio and label */
     cursor: pointer;
 }
+
+@media (max-width: 700px) {
+  input[type="radio"],
+  input[type="checkbox"] {
+    display: none !important;
+  }
+  .option-container .form-check-input {
+    display: none !important;
+  }
+}
+
 
 .option-container .form-check-label {
     cursor: pointer;
