@@ -1,8 +1,61 @@
 body {
     font-family: 'Cairo', sans-serif;
-    background-color: #f8f9fa;
-    /* Global direction is RTL from HTML, but we'll manage LTR for specific elements if needed */
+    /* خلفية تدرج هافت افتراضي (أزرق هادئ) */
+    /* background: linear-gradient(135deg, #d0e9ff 0%, #eaf4ff 60%, #fafdff 100%); */
+    min-height: 100vh;
     direction: ltr;
+    transition: background 0.5s;
+}
+
+/* الوضع الداكن */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #f8f8f8;
+  }
+}
+
+/* الوضع الهافت (soft mode) - يدوي أو عبر كلاس */
+body.soft-mode {
+    background: linear-gradient(135deg, #fafdff 0%, #eaf4ff 60%, #d0e9ff 100%);
+    color: #1a237e;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #f8f8f8;
+}
+
+
+/* أزرار الانتقال للأعلى والأسفل */
+.scroll-btn {
+    position: fixed;
+    right: 30px;
+    z-index: 9999;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6a82fb 0%, #fc5c7d 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    cursor: pointer;
+    opacity: 0.92;
+    transition: background 0.3s, opacity 0.2s;
+}
+.scroll-btn:hover {
+    background: linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%);
+    opacity: 1;
+}
+.scroll-btn.up {
+    bottom: 90px;
+}
+.scroll-btn.down {
+    bottom: 30px;
 }
 
 #quiz-selection {
@@ -15,10 +68,18 @@ body {
 
 .question-card {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1.5px solid #e3e7ef;
+    box-shadow: 0 4px 16px 0 rgba(40,60,120,0.09);
+    transition: box-shadow 0.3s, border 0.3s;
+}
+
+body.dark-mode .question-card {
+    background: #232526;
+    border: 1.5px solid #444b54;
+    box-shadow: 0 4px 16px 0 rgba(180,180,190,0.08);
 }
 
 /* Remove old result card styles */
@@ -73,22 +134,39 @@ body {
 }
 
 /* Optional: Add a subtle effect when the container is checked */
+/* تظليل الخيار عند التحديد في الوضع العادي */
 .option-container:has(input[type="radio"]:checked) {
     background-color: #cfe2ff; /* Bootstrap primary-bg-subtle */
     border-color: #9ec5fe; /* Slightly darker blue */
 }
 
+/* تظليل الخيار عند التحديد في الوضع الداكن */
+body.dark-mode .option-container:has(input[type="radio"]:checked) {
+    background: linear-gradient(90deg, #444 0%, #555 70%, #666 100%);
+    border-color: #888;
+}
+
 /* Inline Feedback Styling */
 .option-container.option-correct {
-    background-color: #d1e7dd; /* Bootstrap success-bg-subtle */
+    background-color: #ca1313c7; /* Bootstrap success-bg-subtle */
     border-color: #a3cfbb;
     color: #0a3622; /* Bootstrap success-text-emphasis */
 }
 
 .option-container.option-incorrect {
-    background-color: #f8d7da; /* Bootstrap danger-bg-subtle */
-    border-color: #f1aeb5;
-    color: #58151c; /* Bootstrap danger-text-emphasis */
+    background-color: #ffccd5; /* أحمر هافت خلفية */
+    border-color: #e57373;
+    color: #b71c1c; /* نص أحمر هافت */
+}
+
+/* الوصف بعد السؤال */
+.option-container.option-incorrect .explanation,
+.explanation.option-incorrect {
+    background: #f2f2f2 !important;
+    color: #e53935 !important;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 8px;
 }
 
 /* Ensure feedback styles override hover/checked states when applied */
@@ -168,12 +246,26 @@ body {
     text-align: center;
 }
 
+/* مودال النتيجة في الوضع الداكن */
+body.dark-mode .modal-content {
+    background: linear-gradient(135deg, #232526 0%, #353738 100%);
+    color: #f8f8f8;
+    border: 1.5px solid #444b54;
+    box-shadow: 0 4px 24px 0 rgba(180,180,190,0.10);
+}
+body.dark-mode .modal-header,
+body.dark-mode .modal-body,
+body.dark-mode .modal-footer {
+    background: transparent;
+    color: #f8f8f8;
+    border-color: #444b54;
+}
+
 
 .main_q {
     cursor: pointer;
     padding: 10px;
     
-
     /* إخفاء الراديو */
     input[type="radio"] {
         display: none;
@@ -199,8 +291,55 @@ body {
     }
 }
 
+body.dark-mode .main_q .form-check-label {
+    background: linear-gradient(90deg, #232526 0%, #2d2f31 100%);
+    color: #f8f8f8;
+    border-color: #444b54;
+}
+
+
 .start_q{
     display: block;
     padding: 15px 30px;
     border-radius: 5px;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #2a2a2a;
+    color: #f8f8f8;
+    border-color: #444;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #b0b0b0;
+}
+
+body.dark-mode button,
+body.dark-mode .btn {
+    background-color: #444;
+    color: #f8f8f8;
+    border-color: #666;
+}
+
+body.dark-mode .question-card,
+body.dark-mode #quiz-selection {
+    background: #232526;
+    color: #f8f8f8;
+}
+
+body.dark-mode .form-check-label {
+    color: #f8f8f8 !important;
+}
+
+body.dark-mode .form-check-input {
+    background-color: #222;
+    border-color: #666;
+}
+
+body.dark-mode .bg-light {
+    background-color: #2d2d2d !important;
+    color: #f8f8f8 !important;
 }
